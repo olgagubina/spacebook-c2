@@ -1,13 +1,8 @@
 var posts = [];
-var text = $("#post-name").val();
 var id = 1;
 var  commId= 1;
-var bindEvent = function() {
-    $('.remove').off();
-    $('.remove').click(removePost);
-    $('.add-comment').off();
-    $('.add-comment').click(postComment);
-}
+
+
 
 // TO ADD POST TO THE POSTS.array
 function addPost (text, id) {
@@ -21,7 +16,6 @@ function addPost (text, id) {
 }
 
 //TO MAKE COMMENTS HTML
-
 function getCommentsHTML(comments) {
     var htmlComments = '<div>';
 
@@ -65,12 +59,11 @@ function postPost() {
     id+=1;
 }
 
-
 //TO REMOVE POST
 function removePost(){
-    var elemID=$(this).data().postid; 
+    var elemId=$(this).data().postid; 
     for (var elemObj in posts){
-        if(posts[elemObj].id=== elemID) {
+        if(posts[elemObj].id=== elemId) {
         posts.splice(elemObj,1);
         break;
         }
@@ -93,24 +86,14 @@ function addComment (postId, idComment, nameComment, textComment) {
     console.log(posts);
 }
 
-// //TO RENDER NEW PAGE WITH COMMENT
-// function renderPostsComm(commId) {
-//     $('.comment-box').html('');
-//     for (var i=0; i<posts[commId].comment.length; i++) {
-//         $('.comment-box').append('<p>' + posts[i].comment.username +': ' + posts[i].comment.commtext + '</p>');
-//     }
-//     bindEvent();
-// }
-
 //TO FIND THE POST OF THE COMMENT
 
 function findPost (postId) { 
     for (var i = 0; i < posts.length; i++) {
-    if (posts[i].id === postId) {
-        return posts[i];
+        if (posts[i].id === postId) {
+            return posts[i];
+        }
     }
-}
-
 }
 
 //TO POST COMMENT
@@ -125,6 +108,10 @@ function postComment() {
 }
 
 $(".add-post").click(postPost);
+var bindEvent = function() {
+    $('.remove').click(removePost);
+    $('.add-comment').click(postComment);
+}
 
 //Add a feature that allows each post to receive a comment. Each post will require it's own form, 
 //allowing a user to leave their username and some kind of comment text. 
