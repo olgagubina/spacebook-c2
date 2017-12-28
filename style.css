@@ -1,0 +1,26 @@
+.remove {
+    display:block;
+    margin-top: 10px;
+}
+
+.post {
+    border: 0.5px solid lightslategray;
+    box-shadow: 0 0 4px rgba(56, 55, 55, 0.8);
+    padding: 10px;
+}
+
+.add-comment {
+    margin-top: 10px;
+}
+
+.name {
+    display: inline-block;
+    width: 19%;
+    box-sizing: border-box;
+}
+
+.comment {
+    display: inline-block;
+    width: 80%;
+    box-sizing: border-box;
+}
