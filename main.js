@@ -19,6 +19,7 @@ var SpacebookApp = function () {
 
   // the current id to assign to a post
   var currentId = 0;
+  var commId = 0;
   var $posts = $('.posts');
 
   var _findPostById = function (id) {
@@ -66,6 +67,14 @@ var SpacebookApp = function () {
     $clickedPost.remove();
   }
 
+  var createComment = function (text, currentPost) {
+    var comment = {
+      text: text
+    }
+    posts
+
+  }
+
   var toggleComments = function (currentPost) {
     var $clickedPost = $(currentPost).closest('.post');
     $clickedPost.find('.comments-container').toggleClass('show');
@@ -75,14 +84,8 @@ var SpacebookApp = function () {
     createPost: createPost,
     renderPosts: renderPosts,
     removePost: removePost,
-
-    // TODO: Implement
-    // createComment: createComment,
-
-    // TODO: Implement
+    createComment: createComment,
     // renderComments: renderComments,
-
-    // TODO: Implement
     // removeComment: removeComment,
     toggleComments: toggleComments
   }
@@ -107,4 +110,11 @@ $('.posts').on('click', '.remove', function () {
 
 $('.posts').on('click','.show-comments', function () {
   app.toggleComments(this);
+});
+
+$('.add-comment').on('click', function () {
+  var text = $('.comment-name').val();
+  
+  app.createPost(text, this);
+  app.renderPosts();
 });
