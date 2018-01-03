@@ -22,6 +22,16 @@ var SpacebookApp = function () {
   var commId = 0;
   var $posts = $('.posts');
 
+  var bindEvent = function() {
+    $('.add-comment').on('click', function () {
+      var text = $('.comment-name').val();
+      var currentId = $(this).id
+      
+      app.createComment(text, currentId);
+      // app.renderPosts();
+    });
+  }
+
   var _findPostById = function (id) {
     for (var i = 0; i < posts.length; i += 1) {
       if (posts[i].id === id) {
@@ -33,7 +43,8 @@ var SpacebookApp = function () {
   var createPost = function (text) {
     var post = {
       text: text,
-      id: currentId
+      id: currentId,
+      comments: []
     }
 
     currentId += 1;
@@ -55,6 +66,7 @@ var SpacebookApp = function () {
         + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + post.text +
         commentsContainer + '</div>');
     }
+    bindEvent();
   }
 
   var removePost = function (currentPost) {
@@ -67,12 +79,16 @@ var SpacebookApp = function () {
     $clickedPost.remove();
   }
 
-  var createComment = function (text, currentPost) {
+  var createComment = function (text, currentId) {
     var comment = {
-      text: text
+      text: text,
     }
-    posts
-
+    for (i=0; i<posts.length; i++) {
+      if(posts[i].id = currentId) {
+        posts[i].comments.push();
+      }
+    }
+    console.log(posts);
   }
 
   var toggleComments = function (currentPost) {
@@ -84,10 +100,10 @@ var SpacebookApp = function () {
     createPost: createPost,
     renderPosts: renderPosts,
     removePost: removePost,
-    createComment: createComment,
+    createComment: createComment
     // renderComments: renderComments,
     // removeComment: removeComment,
-    toggleComments: toggleComments
+    // toggleComments: toggleComments
   }
 }
 
@@ -108,13 +124,14 @@ $('.posts').on('click', '.remove', function () {
   app.removePost(this);
 });
 
-$('.posts').on('click','.show-comments', function () {
-  app.toggleComments(this);
-});
+// $('.posts').on('click','.show-comments', function () {
+//   app.toggleComments(this);
+// });
 
 $('.add-comment').on('click', function () {
   var text = $('.comment-name').val();
+  var currentId = $(this).id
   
-  app.createPost(text, this);
-  app.renderPosts();
+  app.createComment(text, currentId);
+  // app.renderPosts();
 });
